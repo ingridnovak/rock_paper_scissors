@@ -1,46 +1,55 @@
 'use strict';
 
 
+function game(){
 
-let round = 0;
-
-
-function countRound(){
-
-return round += 1;
-}
-
+    const playerSelection = prompt('Enter your move(scissors, rock or paper?): ').toLowerCase();
 
 function getComputerChoice(){
-    let arr = ['Rock', 'Scissors', 'Paper'];
+    let arr = ['rock', 'scissors', 'paper'];
     let index = Math.floor(Math.random() * arr.length);
     return arr[index];
 }
 
 function playRound(playerSelection, computerSelection) {
-   
-    if(round >= 4){
-        return 'Game over!';
-    }
-    console.log(round)
+
     console.log('player - ' + playerSelection + ' and computer ' + computerSelection)
     
     if(playerSelection === computerSelection){
-        return 'its a tie'
+        return 0;
     }
 
-    if((playerSelection === 'Scissors' && computerSelection === 'Paper') || (playerSelection === 'Paper' && computerSelection === 'Rock') || (playerSelection === 'Rock' && computerSelection === 'Scissors')){
-        return 'You win!'
+    if((playerSelection === 'scissors' && computerSelection === 'paper') || (playerSelection === 'paper' && computerSelection === 'rock') || (playerSelection === 'rock' && computerSelection === 'scissors')){
+        return 1;
     }
    
-    if((playerSelection === 'Scissors' && computerSelection === 'Rock') || (playerSelection === 'Paper' && computerSelection === 'Scissors') || (playerSelection === 'Rock' && computerSelection === 'Paper')){
-        return 'You lose!'
+    if((playerSelection === 'scissors' && computerSelection === 'rock') || (playerSelection === 'paper' && computerSelection === 'scissors') || (playerSelection === 'rock' && computerSelection === 'paper')){
+        return -1;
     }
 
 }   
 
+    switch(playRound(playerSelection, getComputerChoice())){
+        case 0:
+            return "It's a tie";
+            break;
+        case 1:
+            yourCount +=1;
+            return 'You win! You count is ' + yourCount  + ' and computer is ' + compCount;
+            break;
+        case -1:
+            compCount +=1;
+            return 'You Lose! You count is ' + yourCount + ' and computer is ' + compCount;
+            break;
+    }
+
+}
+
+
    
-  const playerSelection = 'Scissors';
+  
+  let yourCount = 0;
+  let compCount = 0;
   
 
-  document.getElementById('play').addEventListener('click', () => {countRound(); console.log(playRound(playerSelection, getComputerChoice()))})
+  document.getElementById('play').addEventListener('click', () => { console.log(game())})
